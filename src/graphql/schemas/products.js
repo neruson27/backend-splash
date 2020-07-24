@@ -41,7 +41,6 @@ const types = `
     price: String
     highlight: String
     image: [String]
-    audio: String
     branch: Branch
     model: String
     category: Categories
@@ -94,7 +93,6 @@ const types = `
     price: String!
     highlight: Upload
     image: [Upload]
-    audio: Upload
     branch: BranchInput
     model: String
     category: CategoriesInput

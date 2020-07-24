@@ -76,9 +76,9 @@ const ProductSchema = new mongoose.Schema({
   image:{
     type: [String]
   },
-  audio: {
-    type: String
-  },
+  // audio: {
+  //   type: String
+  // },
   branch: {
     type: {BranchSchema},
     required: true

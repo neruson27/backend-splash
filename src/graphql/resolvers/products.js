@@ -261,11 +261,6 @@ export const Mutation = {
         }
         data.image = imageDir
       }
-      if(data.audio) {
-        let audioDir = await processUpload(data.audio, dirBase)
-        console.log('audio guardado en: ', audioDir)
-        data.audio = audioDir.relativePath
-      }
       if(data.tags && data.tags.length > 0) {
         let tags = []
         for (let tag of data.tags) {
@@ -578,11 +573,6 @@ export const Mutation = {
         }
         if(imageDir > 0) data.image = imageDir
       }
-      if(data.audio) {
-        let audioDir = await processUpload(data.audio, dirBase)
-        console.log('audio guardado en: ', audioDir)
-        if(audioDir.relativePath) data.audio = audioDir.relativePath
-      }
       return Products.findById(id)
       .then((res) => {
         console.log(res)
@@ -601,7 +591,6 @@ export const Mutation = {
         if(data.important) res.important = data.important
         if(data.highlight) res.highlight = data.highlight
         if(data.image) res.image = data.image
-        if(data.audio) res.audio = data.audio
         res.save()
         return res
       });

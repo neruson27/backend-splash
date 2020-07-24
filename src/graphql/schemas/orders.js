@@ -21,7 +21,6 @@ const types = `
     price: String
     highlight: String
     image: [String]
-    audio: String
     branch: BranchInput
     model: String
     category: CategoriesInput
