@@ -19,7 +19,7 @@ export default  {
       development: 'mongodb://127.0.0.1:27017/splash',
       heroku: 'mongodb+srv://neruson:n3rus0n@orinoco27-i9v0z.mongodb.net/splash?retryWrites=true&w=majority',
       // production: 'mongodb://127.0.0.1:27017/splash'
-      production: 'mongodb+srv://neruson:n3rus0n@orinoco27-i9v0z.mongodb.net/vertice?retryWrites=true&w=majority'
+      production: 'mongodb+srv://neruson:n3rus0n@orinoco27-i9v0z.mongodb.net/splash?retryWrites=true&w=majority'
     },
     debug: true
   },
