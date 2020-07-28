@@ -12,14 +12,14 @@ const ENV = process.env.NODE_ENV || 'development'
 export default  {
   env: ENV,
   server: {
-    port: process.env.PORT || 4000
+    port: process.env.PORT || 4002
   },
   db: {
     mongo: {
       development: 'mongodb://127.0.0.1:27017/splash',
       heroku: 'mongodb+srv://neruson:n3rus0n@orinoco27-i9v0z.mongodb.net/splash?retryWrites=true&w=majority',
-      // production: 'mongodb://127.0.0.1:27017/splash'
-      production: 'mongodb+srv://neruson:n3rus0n@orinoco27-i9v0z.mongodb.net/splash?retryWrites=true&w=majority'
+      production: 'mongodb://127.0.0.1:27017/splash'
+      // production: 'mongodb+srv://neruson:n3rus0n@orinoco27-i9v0z.mongodb.net/splash?retryWrites=true&w=majority'
     },
     debug: true
   },
