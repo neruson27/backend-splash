@@ -145,10 +145,6 @@ export const Mutation = {
         let tagsgroup = []
         for (let tag of data.tagsgroup) {
           let t = await Tagsgroup.findOne({name: tag.name})
-          t = {
-            _id: t._id,
-            name: t.name
-          }
           tagsgroup.push(t)
         }
         data.tagsgroup = tagsgroup
@@ -158,10 +154,6 @@ export const Mutation = {
         let subcategories = []
         for (let subcategory of data.subcategory) {
           let t = await Subcategories.findOne({name: subcategory.name})
-          t = {
-            _id: t._id,
-            name: t.name
-          }
           subcategories.push(t)
         }
         data.subcategory = subcategories
@@ -247,12 +239,12 @@ export const Mutation = {
   AddProduct: authorize([], async (_, { data }, { credentials: { user }, dirBase }) => {
     try {
       if(!data) throw 'data-is-undefined'
-      if(data.highlight || data.highlight.length > 0) {
+      if(data.highlight && typeof data.highlight === 'object') {
         let tempImageDir = await processUpload(data.highlight, dirBase)
         console.log('Imagen destacada guardada en: ', tempImageDir)
         data.highlight = tempImageDir.relativePath
       }
-      if(data.image || data.image.length > 0) {
+      if(data.image && data.image.length > 0) {
         console.log('----: cantidad de imagenes: ', data.image.length)
         let imageDir = []
         for (let image of data.image) {

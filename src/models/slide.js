@@ -7,6 +7,9 @@ const SlideSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  url: {
+    type: String
+  }
 }, {_id: true})
 
 SlideSchema.pre('save', function (next) {

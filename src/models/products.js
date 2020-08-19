@@ -60,18 +60,17 @@ const ProductSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true
   },
   description_long: {
     type: String,
-    required: true
   },
   price: {
     type: String,
     required: true
   },
   highlight: {
-    type: String
+    type: String,
+    required: true
   },
   image:{
     type: [String]
@@ -81,7 +80,6 @@ const ProductSchema = new mongoose.Schema({
   // },
   branch: {
     type: {BranchSchema},
-    required: true
   },
   model: {
     type: String,
@@ -98,15 +96,16 @@ const ProductSchema = new mongoose.Schema({
   },
   ref: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
-  ctd: {
-    type: Number
-  },
-  important: {
-    type: Boolean,
-    default: false
-  },
+  // ctd: {
+  //   type: Number
+  // },
+  // important: {
+  //   type: Boolean,
+  //   default: false
+  // },
   createdAt: {
     type: Date,
     index: true

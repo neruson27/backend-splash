@@ -47,9 +47,7 @@ const types = `
     subcategory: Subcategories
     tags: [Tag]
     ref: String
-    ctd: Int
     quantity: Int
-    important: Boolean
     createdAt: Date
   }
 
@@ -88,19 +86,17 @@ const types = `
 
   input ProductInput {
     name: String!
-    description: String!
+    description: String
     description_long: String
     price: String!
-    highlight: Upload
+    highlight: Upload!
     image: [Upload]
     branch: BranchInput
     model: String
-    category: CategoriesInput
+    category: CategoriesInput!
     subcategory: SubCategoryInput
     tags: [TagsInput]
     ref: String!
-    ctd: Int!
-    important: Boolean
   }
 `
 const queries = `
