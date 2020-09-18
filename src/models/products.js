@@ -82,8 +82,7 @@ const ProductSchema = new mongoose.Schema({
     type: {BranchSchema},
   },
   model: {
-    type: String,
-    required: true
+    type: String
   },
   category: {
     type: {CategoriesSchema}
