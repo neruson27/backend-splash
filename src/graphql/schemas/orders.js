@@ -12,7 +12,18 @@ const types = `
   input OrdersInput {
     ref_payco: String
     products: [ProductsInput]
+    checkout: UserDataInput
     price: Float
+  }
+
+  input UserDataInput {
+    name: String
+    dni: String
+    total: String
+    concept: String
+    tlf: String
+    dir: String
+    email: String
   }
 
   input ProductsInput {
@@ -27,8 +38,6 @@ const types = `
     subcategory: SubCategoryInput
     tags: [TagsInput]
     ref: String
-    ctd: Int
-    important: Boolean
     createdAt: Date
     quantity: Int
   }
@@ -37,6 +46,7 @@ const types = `
 
 const queries = `
   AllOrders: [Orders]
+  NumOrders: Int
   OneOrder(id: ID): Orders
 `
 

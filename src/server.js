@@ -68,6 +68,7 @@ app.dirBase = __dirname;
 console.log(app.dirBase)
 
 app.use("/files", serveStatic (__dirname + '/files' ));
+app.use("/email", serveStatic(__dirname + '/email'))
 console.log(`
   :---------------------------------------
 

@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    {% block css %}
+      <link rel="stylesheet" href="/css/bootstrap.css">
+      <link rel="stylesheet" href="/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.6.55/css/materialdesignicons.min.css">
+      <link rel="stylesheet" href="style.css">
+    {% endblock %}
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row bg-azulito" style="height:4px;"></div>
+    <div class="row">
+      <div class="col-1 text-center bg-gris">
+      </div>
+      <div class="col-3 text-center bg-azulito">
+        <img style="width: 70%;" src="logo_splash_2.svg"></img>
+      </div>
+      <div class="col-8 text-center bg-gris">
+      </div>
+    </div>
+    <h3 class="ml-2">Gracias <span class="text-danger">{{ nombre }}</span> por preferir a perfumesysplash.com</h3>
+    
+    <h4 class="ml-2">Recibimos la solicitud de compra que realizaste en nuestro sitio.</h4> <br>
+
+    <div class="row ml-2">
+      <div class="col-6">
+        <h6>Orden Numero {{orden}}</h6>
+        <p class="m-t-1">
+          <h6>a nombre de:</h6>
+          <span>{{nombre}}</span><br/>
+          <span>{{dni}}</span><br/>
+          <span>{{tlf}}</span><br/>
+          <span>{{dir}}</span><br/>
+          <span>{{email}}</span><br/>
+          <p class="m-t-3"><b>Por valor de:</b></p>
+          <h6><b>${{total}}</b></h6>
+        </p>
+      </div>
+      <div class="col-6">
+        <img src="logo_aprobado.png" style="width: 70%;">
+      </div>
+    </div>
+
+    <div class="row ml-2 mt-1">
+      <h5 class="col-12">Pasos de tu compra:</h5>
+      <img class="col-12" src="pasos.png">
+    </div>
+
+    <div class="row ml-2">
+      <h5 class="col-12">Detalles de tu compra <b>{{orden}}</b></h5>
+      <div class="col-5">
+        <span>Realizada por:</span><br>
+        <span>{{nombre}}</span>
+      </div>
+      <div class="col-5">
+        <span>Fecha de solicitud:</span><br>
+        <span>{{fecha}}</span>
+      </div>
+      <div class="col-12">
+        <span>Total:</span><br>
+        <span>{{total}}</span>
+      </div>
+    </div>
+
+    <div class="row ml-2 mt-1">
+      <h5 class="col-12">Productos:</h5>
+      <table class="col-10 table mx-auto table-striped">
+        <tbody>
+          {% for product in products%}
+          <tr>
+            <th scope="row" class="text-center"><img src="{{product.hightlight}}" style="height: 80px;"></th>
+            <td class="pt-4"><h6>{{product.name}}</h6>{{product.description}}</td>
+            <td>
+              <div class="row pl-2 pt-4">
+                Unidades: <p class="text-center rounded border border-gris ml-1 rounded w-25">{{product.quantity}}</p>
+              </div>
+            </td>
+            <td>
+              <div class="row pl-2 pt-4">
+                Total: <p class="text-center rounded border border-gris ml-1 rounded w-50">{{product.quantity * product.price}}</p>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row bg-azulito">
+      <img class="mx-auto py-3" style="width: 70%;" src="logo_envio.svg">
+    </div>
+    <div class="row">
+      <div class="col-4 text-center bg-gris">
+        <img class="p-3" style="width: 60%;" src="logo_splash_2.svg"></img>
+      </div>
+      <div class="col-4 text-center bg-gris pt-3">
+        <div class="text-white row">
+          <span class="mdi mdi-facebook "></span><p class="font-weight-light">@splash_colombia</p>
+        </div>
+        <div class="text-white row">
+          <span class="mdi mdi-instagram "></span><p class="font-weight-light">@splashcolombia</p>
+        </div>
+        <div class="text-white row">
+          <span class="mdi mdi-email "></span><p class="font-weight-light">comercial@perfumesysplash.com</p>
+        </div>
+      </div>
+      <div class="col-4 text-center bg-gris pt-3">
+        <div class="text-white row">
+          <span class="mdi mdi-whatsapp "></span><p class="font-weight-light">+57 301 3310 597</p>
+        </div>
+        <div class="text-white row">
+          <span class="mdi mdi-phone "></span><p class="font-weight-light">+57 301 3310 597</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -18,6 +18,9 @@ const OrderSchema = new mongoose.Schema({
   products: {
     type: [mongoose.Schema.Types.Mixed]
   },
+  checkout: {
+    type: [mongoose.Schema.Types.Mixed]
+  },
   price: {
     type: Number,
     required: true
