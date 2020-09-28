@@ -30,7 +30,6 @@ const BranchSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
     unique: true
   }
 }, {_id: true})
