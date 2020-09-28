@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8" />
     {% block css %}
-      <link rel="stylesheet" href="https://perfumesysplash.com/email/css/bootstrap.css">
-      <link rel="stylesheet" href="https://perfumesysplash.com/email/css/bootstrap.min.css">
+      <link rel="stylesheet" href="./css/bootstrap.css">
+      <link rel="stylesheet" href="./css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.6.55/css/materialdesignicons.min.css">
-      <link rel="stylesheet" href="https://perfumesysplash.com/email/style.css">
+      <link rel="stylesheet" href="./style.css">
     {% endblock %}
 </head>
 <body>
@@ -16,7 +16,7 @@
       <div class="col-1 text-center bg-gris">
       </div>
       <div class="col-3 text-center bg-azulito">
-        <img style="width: 70%;" src="https://perfumesysplash.com/email/logo_splash_2.svg"></img>
+        <img style="width: 60%;" src="https://perfumesysplash.com/email/logo_splash_2.png"></img>
       </div>
       <div class="col-8 text-center bg-gris">
       </div>
@@ -40,7 +40,7 @@
         </p>
       </div>
       <div class="col-6">
-        <img src="https://perfumesysplash.com/email/logo_aprobado.png" style="width: 70%;">
+        <img src="https://perfumesysplash.com/email/logo_aprobado.png" style="width: 60%;">
       </div>
     </div>
 
@@ -71,16 +71,16 @@
         <tbody>
           {% for product in products%}
           <tr>
-            <th scope="row" class="text-center"><img src="https://perfumesysplash.com{{product.hightlight}}" style="height: 80px;"></th>
+            <th scope="row" class="text-center"><img src="https://perfumesysplash.com/files/{{product.hightlight}}" style="height: 80px;"></th>
             <td class="pt-4"><h6>{{product.name}}</h6>{{product.description}}</td>
             <td>
               <div class="row pl-2 pt-4">
-                Unidades: <p class="text-center rounded border border-gris ml-1 rounded w-25">{{product.quantity}}</p>
+                Unidades: <p class="text-center rounded border ml-1 rounded w-25">{{product.quantity}}</p>
               </div>
             </td>
             <td>
               <div class="row pl-2 pt-4">
-                Total: <p class="text-center rounded border border-gris ml-1 rounded w-50">{{product.quantity * product.price}}</p>
+                Total: <p class="text-center rounded border ml-1 rounded w-50">{{product.quantity * product.price}}</p>
               </div>
             </td>
           </tr>
@@ -90,13 +90,13 @@
     </div>
 
     <div class="row bg-azulito">
-      <img class="mx-auto py-3" style="width: 70%;" src="https://perfumesysplash.com/email/logo_envio.svg">
+      <img class="mx-auto py-3" style="width: 60%;" src="https://perfumesysplash.com/email/logo_envio.png">
     </div>
     <div class="row">
       <div class="col-4 text-center bg-gris">
-        <img class="p-3" style="width: 60%;" src="https://perfumesysplash.com/email/logo_splash_2.svg"></img>
+        <img class="p-3" style="width: 60%;" src="https://perfumesysplash.com/email/logo_splash_2.png"></img>
       </div>
-      <div class="col-4 text-center bg-gris pt-3">
+      <div class="col-4 text-center bg-gris">
         <div class="text-white row">
           <span class="mdi mdi-facebook "></span><p class="font-weight-light">@splash_colombia</p>
         </div>
@@ -107,7 +107,7 @@
           <span class="mdi mdi-email "></span><p class="font-weight-light">comercial@perfumesysplash.com</p>
         </div>
       </div>
-      <div class="col-4 text-center bg-gris pt-3">
+      <div class="col-4 text-center bg-gris">
         <div class="text-white row">
           <span class="mdi mdi-whatsapp "></span><p class="font-weight-light">+57 301 3310 597</p>
         </div>
