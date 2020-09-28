@@ -1,21 +1,20 @@
 import { authorize } from '../../utils/authorize-resolvers';
 import { UserInputError, withFilter } from 'apollo-server-express';
 import Orders from '../../models/orders'
+import dotenv from 'dotenv'
+dotenv.config()
 var nodemailer = require('nodemailer');
-var BootstrapEmail = require('bootstrap-email');
 var swig = require('swig')
-var EmailTemplates = require('swig-email-templates');
-var templates = new EmailTemplates();
-var singleTemplate = new BootstrapEmail(__dirname + '/../../email/page.html')
-singleTemplate.compileAndSave(__dirname + '/../../email/pageB.html')
-var tmpl = swig.compileFile(__dirname + '/../../email/pageB.html')
+var tmpl = swig.compileFile(__dirname + '/../../email/page.html')
 
 var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: 'damiangonz2702@gmail.com',
-      pass: 'Luisana2702'
-    }
+  host: "smtp.zoho.com",
+  port: 465,
+  secure: true, // upgrade later with STARTTLS
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
 });
 
 export const Query = {
@@ -79,31 +78,19 @@ export const Mutation = {
       fecha: new Date().toDateString(),
       total: data.checkout.total,
     });
-    templates.render(__dirname + '/../../email/page.ejs', {
-      products: data.products,
-      orden: '0000'+data.orderNumber,
-      nombre: data.checkout.name,
-      dni: data.checkout.dni,
-      tlf: data.checkout.tlf,
-      dir: data.checkout.dir,
-      email: data.checkout.email,
-      fecha: new Date().toDateString(),
-      total: data.checkout.total,
-    }, function(err, html, text, subject) {
+    
       var mailOptions1 = {
-        from: 'damiangonz2702@gmail.com',
+        from: 'comercial@perfumesysplash.com',
         to: data.checkout.email,
         subject: 'Compra exitosa!',
-        html: html,
-        text: text
+        html: renderedHtml,
       }
   
       var mailOptions2 = {
-        from: 'damiangonz2702@gmail.com',
-        to: "kaironelson@gmail.com",
-        subject: 'Compra exitosa!',
-        html: html,
-        text: text
+        from: 'comercial@perfumesysplash.com',
+        to: "gerencia@perfumesysplash.com",
+        subject: 'Un usuario ha comprado!',
+        html: renderedHtml,
       }
   
       console.log("sending email", mailOptions1)
@@ -125,7 +112,6 @@ export const Mutation = {
           console.log('Email sent: ' + info.response);
         }
       })
-    })
     
     
     return Orders.create(data).then(order => {

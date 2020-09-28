@@ -1,15 +1,16 @@
 var app = require('express')(),
     swig = require('swig'),
     serveStatic = require('serve-static')
+require('dotenv').config()
 var nodemailer = require('nodemailer');
-var BootstrapEmail = require('bootstrap-email');
-var singleTemplate = new BootstrapEmail(__dirname + '/../src/email/page.html')
-singleTemplate.compileAndSave(__dirname + '/../src/email/pageB.html')
+
 var transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  host: "smtp.zoho.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: 'damiangonz2702@gmail.com',
-    pass: 'Luisana2702'
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
   }
 });
 
@@ -55,12 +56,12 @@ app.get('/', function (req, res) {
       tlf: '04147852491',
       dir: 'Calle 1 sector x',
       email: 'kaironelson@gmail.com',
-      fecha: Date('26/09/2020'),
+      fecha: new Date().toDateString(),
       total: 50000,
     });
 
     var mailOptions2 = {
-      from: 'damiangonz2702@gmail.com',
+      from: process.env.EMAIL,
       to: "kaironelson@gmail.com",
       subject: 'Compra exitosa!',
       html: renderedHtml
@@ -68,14 +69,14 @@ app.get('/', function (req, res) {
 
     console.log("sending email", mailOptions2)
 
-    // transporter.sendMail(mailOptions2, function (error, info) {
-    //   console.log("senMail returned!");
-    //   if (error) {
-    //     console.log("ERROR!!!!!!", error);
-    //   } else {
-    //     console.log('Email sent: ' + info.response);
-    //   }
-    // })
+    transporter.sendMail(mailOptions2, function (error, info) {
+      console.log("senMail returned!");
+      if (error) {
+        console.log("ERROR!!!!!!", error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    })
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(renderedHtml);
