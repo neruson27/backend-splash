@@ -96,12 +96,6 @@ console.log(`
 
 app.use(authorization);
 
-app.post('/response', function (req, res) {
-  console.log(req.url)
-  res.redirect(307, 'http://localhost:8080')
-  res.end()
-})
-
 // habiliar peticions options
 app.options('/graphql', (req, res, next) => {
   console.log('---> peticion options....');
