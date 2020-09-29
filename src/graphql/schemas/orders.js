@@ -22,6 +22,7 @@ const types = `
     total: String
     concept: String
     tlf: String
+    city: String
     dir: String
     email: String
   }

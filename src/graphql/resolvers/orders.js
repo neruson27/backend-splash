@@ -72,6 +72,7 @@ export const Mutation = {
       orden: '0000'+data.orderNumber,
       nombre: data.checkout.name,
       dni: data.checkout.dni,
+      city: data.checkout.city,
       tlf: data.checkout.tlf,
       dir: data.checkout.dir,
       email: data.checkout.email,
