@@ -107,7 +107,8 @@
         <tbody>
           {% for product in products%}
           <tr>
-            <th scope="row" class="text-center"><img src="https://perfumesysplash.com{{product.hightlight}}" style="height: 80px;"></th>
+            <th scope="row" class="text-center">
+              <img src="https://perfumesysplash.com{{product.hightlight}}" style="height: 80px;"></th>
             <td class="pt-4"><h6>{{product.name}}</h6>{{product.description}}</td>
             <td>
               <div class="row pl-2 pt-4">
@@ -125,29 +126,14 @@
       </table>
     </div>
 
-    <div class="row bg-azulito">
-      <img class="mx-auto py-3" style="width: 30vw;" src="https://perfumesysplash.com/email/logo_envio.png">
-    </div>
     <div class="row">
-      <div class="col-4 text-center bg-gris">
-        <div class="text-white row">
-          <span class="mdi mdi-facebook">FB:</span><p class="font-weight-light"> @splash_colombia</p>
-        </div>
-        <div class="text-white row">
-          <span class="mdi mdi-instagram">IG:</span><p class="font-weight-light"> @splashcolombia</p>
-        </div>
-        <div class="text-white row">
-          <span class="mdi mdi-email ">Email:</span><p class="font-weight-light"> comercial@perfumesysplash.com</p>
-        </div>
+      <!-- <div class="col-1 text-center bg-gris" style="background-color:#2d2f33;height: 20vh;">
+      </div> -->
+      <div class="col-3 text-center bg-azulito" style="height:20vh; width: 60vw;">
+        <img style="width: 10vw; height: 25vh" src="https://perfumesysplash.com/email/footer_1.png"></img>
       </div>
-      <div class="col-4 text-center bg-gris">
-        <div class="text-white row">
-          <span class="mdi mdi-whatsapp ">Ws:</span><p class="font-weight-light"> +57 301 3310 597</p>
-        </div>
-        <div class="text-white row">
-          <span class="mdi mdi-phone ">Tel:</span><p class="font-weight-light"> +57 301 3310 597</p>
-        </div>
-      </div>
+      <!-- <div class="col-8 text-center bg-gris" style="background-color:#2d2f33;height: 20vh;">
+      </div> -->
     </div>
   </div>
 </body>

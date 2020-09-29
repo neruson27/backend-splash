@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import initMongo from './utils/mongodb'
 import graphql from './graphql'
 import authorization from './middleware/authorization'
+import { request } from 'http';
 
 
 /**
@@ -94,6 +95,12 @@ console.log(`
 
 
 app.use(authorization);
+
+app.post('/response', function (req, res) {
+  console.log(req.url)
+  res.redirect(307, 'http://localhost:8080')
+  res.end()
+})
 
 // habiliar peticions options
 app.options('/graphql', (req, res, next) => {
