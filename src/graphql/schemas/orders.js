@@ -4,9 +4,21 @@ const types = `
     ref_payco: String
     orderNumber: Int
     products: [Product]
+    checkout: UserData
     price: Float
     status: String
     createdAt: Date
+  }
+
+  type UserData {
+    name: String
+    dni: String
+    total: String
+    concept: String
+    tlf: String
+    city: String
+    dir: String
+    email: String
   }
 
   input OrdersInput {
