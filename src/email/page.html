@@ -3,9 +3,6 @@
 <head>
     <meta charset="utf-8" />
     {% block css %}
-      <link rel="stylesheet" href="./css/bootstrap.css">
-      <link rel="stylesheet" href="./css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.6.55/css/materialdesignicons.min.css">
       <link rel="stylesheet" href="./style.css">
     {% endblock %}
 </head>
@@ -14,8 +11,7 @@
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
   }
   .row {
     display: -ms-flexbox;
@@ -33,10 +29,20 @@
     flex: 0 0 25%;
     max-width: 25%;
   }
+  .col-5 {
+    -ms-flex: 0 0 41.666667%;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+  }
   .col-8 {
     -ms-flex: 0 0 66.666667%;
     flex: 0 0 66.666667%;
     max-width: 66.666667%;
+  }
+  .col-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
   .text-center {
     text-align: center !important;
@@ -45,92 +51,102 @@
     background-color: #2d2f33;
   }
 </style>
-<body>
-  <div class="container-fluid">
+<body width="100%" style="margin: 0; mso-line-height-rule: exactly;background-color: #F1F1F1;">
+  <div class="container" style="width: 70%;  background: #FFFFFF; text-align: left; margin: 0 auto;">
     <!-- <div class="row bg-azulito" style="background-color: #00bfb0;height:4px;"></div> -->
     <div class="row">
       <!-- <div class="col-1 text-center bg-gris" style="background-color:#2d2f33;height: 20vh;">
       </div> -->
       <div class="bg-azulito" style="background-color: #00bfb0; height:20vh; width: 100%;">
-        <img style="width: 15vh; height: 20vh; margin-left:3%" src="https://perfumesysplash.com/email/logo_splash_2.png"></img>
+        <img style="height: 20vh; margin-left:3%" src="https://perfumesysplash.com/email/logo_splash_2.png"></img>
       </div>
       <div class="text-center bg-gris" style="background-color:#2d2f33;height:2vh; width: 100%;">
       </div>
     </div>
-    <h3 class="ml-2">Gracias <span class="text-danger">{{ nombre }}</span> por preferir a perfumesysplash.com</h3>
     
-    <h4 class="ml-2">Recibimos la solicitud de compra que realizaste en nuestro sitio.</h4> <br>
+    <div style="padding-left: 1em;">
+      <h3 class="ml-2">Gracias <span class="text-danger" style="color: #D32228;">{{ nombre }}</span> por preferir a perfumesysplash.com</h3>
+    
+      <h4 class="ml-2">Recibimos la solicitud de compra que realizaste en nuestro sitio.</h4> <br>
 
-    <div class="row ml-2">
-      <div class="col-6">
-        <h6>Orden Numero {{orden}}</h6>
-        <p class="m-t-1">
-          <h6>a nombre de:</h6>
-          <span>{{nombre}}</span><br/>
-          <span>{{dni}}</span><br/>
-          <span>{{tlf}}</span><br/>
-          <span>{{city}}</span><br/>
-          <span>{{dir}}</span><br/>
-          <span>{{email}}</span><br/>
-          <p class="m-t-3"><b>Por valor de:</b></p>
-          <h6><b>${{total}}</b></h6>
-        </p>
+      <div class="row ml-2" style="display: -ms-flexbox; display: flex; ">
+        <div class="col-6" style="-ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%;">
+          <h5>Orden Numero {{orden}}</h5>
+          <p class="m-t-1">
+            <h6>a nombre de:</h6>
+            <span>{{nombre}}</span><br/>
+            <span>{{dni}}</span><br/>
+            <span>{{tlf}}</span><br/>
+            <span>{{city}}</span><br/>
+            <span>{{dir}}</span><br/>
+            <span>{{email}}</span><br/>
+            <p class="m-t-3"><b>Por valor de:</b></p>
+            <h6><b>${{total}}</b></h6>
+          </p>
+        </div>
+        <div class="col-6" style="background-color:#fefefe;" style="-ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%;">
+          <img src="https://perfumesysplash.com/email/logo_aprobado.png" style="width: 20vw;">
+        </div>
       </div>
-      <div class="col-6" style="background-color:#fefefe;">
-        <img src="https://perfumesysplash.com/email/logo_aprobado.png" style="width: 20vw;">
-      </div>
-    </div>
 
-    <div class="row ml-2 mt-1">
-      <h5 class="col-12">Pasos de tu compra:</h5>
-      <img class="col-12" src="https://perfumesysplash.com/email/pasos.png" style="width: 30vw;">
-    </div>
+      <div class="row ml-2 mt-1">
+        <div class="col-12" style="-ms-flex: 0 0 100%; flex: 0 0 100%;max-width: 100%;">
+          <h5>Pasos de tu compra:</h5>
+        </div>
+        <br>
+        <div class="col-12" style="-ms-flex: 0 0 100%; flex: 0 0 100%;">
+          <img src="https://perfumesysplash.com/email/pasos.png" style="width: 50vw">
+        </div>
+      </div>
 
-    <div class="row ml-2">
-      <h5 class="col-12">Detalles de tu compra <b>{{orden}}</b></h5>
-      <div class="col-5">
-        <span>Realizada por:</span><br>
-        <span>{{nombre}}</span>
+      <div class="row ml-2">
+        <h5 class="col-12" style="-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%;">Detalles de tu compra <b>{{orden}}</b></h5><br>
+        <div style="display: flex;">
+          <div class="col-3" style="-ms-flex: 0 0 41.666667%; flex: 0 0 41.666667%; max-width: 41.666667%;margin-right: 4em;">
+            <span>Realizada por:</span><br>
+            <span>{{nombre}}</span>
+          </div>
+          <div class="col-3" style="-ms-flex: 0 0 41.666667%; flex: 0 0 41.666667%; max-width: 41.666667%;">
+            <span>Fecha de solicitud:</span><br>
+            <span>{{fecha}}</span>
+          </div>
+        </div>
+        <div class="col-12" style="-ms-flex: 0 0 100%; flex: 0 0 100%; max-width: 100%; margin-top: 1em;">
+          <span>Total:</span><br>
+          <span>{{total}}</span>
+        </div>
       </div>
-      <div class="col-5">
-        <span>Fecha de solicitud:</span><br>
-        <span>{{fecha}}</span>
-      </div>
-      <div class="col-12">
-        <span>Total:</span><br>
-        <span>{{total}}</span>
-      </div>
-    </div>
 
-    <div class="row ml-2 mt-1">
-      <h5 class="col-12">Productos:</h5>
-      <table class="col-10 table mx-auto table-striped">
-        <tbody>
-          {% for product in products%}
-          <tr>
-            <th scope="row" class="text-center"><img src="https://perfumesysplash.com{{product.highlight}}" style="height: 80px;"></th>
-            <td class="pt-4"><h6>{{product.name}}</h6>{{product.description}}</td>
-            <td>
-              <div class="row pl-2 pt-4">
-                Unidades: <p class="text-center rounded border ml-1 rounded w-25">{{product.quantity}}</p>
-              </div>
-            </td>
-            <td>
-              <div class="row pl-2 pt-4">
-                Total: <p class="text-center rounded border ml-1 rounded w-50">{{product.quantity * product.price}}</p>
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="row ml-2 mt-1">
+        <h5 class="col-12">Productos:</h5>
+        <table class="col-12 table mx-auto table-striped">
+          <tbody>
+            {% for product in products%}
+            <tr>
+              <th scope="row" class="text-center"><img src="https://perfumesysplash.com{{product.highlight}}" style="height: 80px;"></th>
+              <td class="pt-4"><h6>{{product.name}}</h6>{{product.description}}</td>
+              <td>
+                <div class="row pl-2 pt-4">
+                  Unidades: <p class="text-center rounded border ml-1 rounded w-25">{{product.quantity}}</p>
+                </div>
+              </td>
+              <td>
+                <div class="row pl-2 pt-4">
+                  Total: <p class="text-center rounded border ml-1 rounded w-50">{{product.quantity * product.price}}</p>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="row">
       <!-- <div class="col-1 text-center bg-gris" style="background-color:#2d2f33;height: 20vh;">
       </div> -->
       <div class="text-center bg-azulito">
-        <img style="width: 100%; height: 35vh" src="https://perfumesysplash.com/email/footer_1.png"></img>
+        <img style="width: 100%;" src="https://perfumesysplash.com/email/footer_1.png"></img>
       </div>
       <!-- <div class="col-8 text-center bg-gris" style="background-color:#2d2f33;height: 20vh;">
       </div> -->
