@@ -569,20 +569,20 @@ export const Mutation = {
       .then((res) => {
         console.log(res)
         if(!data) throw 'data-is-undefined'
-        if(data.name) res.name = data.name
-        if(data.description) res.description = data.description
-        if(data.description_long) res.description_long = data.description_long
-        if(data.price) res.price = data.price
-        if(data.branch) res.branch = data.branch
-        if(data.model) res.model = data.model
-        if(data.category) res.category = data.category
-        if(data.subcategory) res.subcategory = data.subcategory
-        if(data.tag) res.tag = data.tag
-        if(data.ref) res.ref = data.ref
-        if(data.ctd) res.ctd = data.ctd
-        if(data.important) res.important = data.important
-        if(data.highlight) res.highlight = data.highlight
-        if(data.image) res.image = data.image
+        if(data.name && res.name !== data.name) res.name = data.name
+        if(data.description && res.description !== data.description) res.description = data.description
+        if(data.description_long && res.description_long !== data.description_long) res.description_long = data.description_long
+        if(data.price && res.price !== data.price) res.price = data.price
+        if(data.branch && res.branch !== data.branch) res.branch = data.branch
+        if(data.model && res.model !== data.model) res.model = data.model
+        if(data.category && res.category !== data.category) res.category = data.category
+        if(data.subcategory && res.subcategory !== data.subcategory) res.subcategory = data.subcategory
+        if(data.tag && res.tag !== data.tag) res.tag = data.tag
+        if(data.ref && res.ref !== data.ref) res.ref = data.ref
+        if(data.ctd && res.ctd !== data.ctd) res.ctd = data.ctd
+        if(data.important && res.important !== data.important) res.important = data.important
+        if(data.highlight && res.highlight !== data.highlight) res.highlight = data.highlight
+        if(data.image && res.image !== data.image) res.image = data.image
         res.save()
         return res
       });
