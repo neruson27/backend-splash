@@ -551,12 +551,12 @@ export const Mutation = {
   }),
   UpdateProduct: authorize([], async (_, { id, data }, { credentials: { user }, dirBase }) => {
     try {
-      if(data.highlight) {
+      if(typeof data.highlight !== 'String') {
         let tempImageDir = await processUpload(data.highlight, dirBase)
         console.log('Imagen destacada guardada en: ', tempImageDir)
         if(tempImageDir.relativePath) data.highlight = tempImageDir.relativePath
       }
-      if(data.image) {
+      if(typeof data.image !== 'String') {
         console.log('----: cantidad de imagenes: ', data.image.length)
         let imageDir = []
         for (let image of data.image) {
