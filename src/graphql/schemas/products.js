@@ -98,6 +98,21 @@ const types = `
     tags: [TagsInput]
     ref: String!
   }
+
+  input ProductUpdateInput {
+    name: String!
+    description: String
+    description_long: String
+    price: String!
+    highlight: Upload
+    image: [Upload]
+    branch: BranchInput
+    model: String
+    category: CategoriesInput!
+    subcategory: SubCategoryInput
+    tags: [TagsInput]
+    ref: String!
+  }
 `
 const queries = `
   AllCategories: [Categories]
@@ -126,7 +141,7 @@ const mutations = `
   UpdateTagsgroup(id: ID, data: TagsgroupInput): Tagsgroup
   AddProduct(data: ProductInput): Product
   DelProduct(id: ID): Response
-  UpdateProduct(id: ID, data: ProductInput): Product
+  UpdateProduct(id: ID, data: ProductUpdateInput): Product
 `
 
 export {types, queries, mutations}
