@@ -569,7 +569,7 @@ export const Mutation = {
           let tempImageDir = await processUpload(image, dirBase)
           if(tempImageDir.relativePath) imageDir.push(tempImageDir.relativePath)
         }
-        if(imageDir > 0) data.image = imageDir
+        if(imageDir.length > 0) data.image = imageDir
       }
       return Products.findById(id)
       .then((res) => {
