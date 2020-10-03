@@ -551,6 +551,12 @@ export const Mutation = {
   }),
   UpdateProduct: authorize([], async (_, { id, data }, { credentials: { user }, dirBase }) => {
     try {
+      console.log(`
+      ########################
+      typeof highlight ${typeof data.highlight}
+      typeof image ${typeof data.image}
+      ########################
+      `)
       if(typeof data.highlight !== 'string') {
         let tempImageDir = await processUpload(data.highlight, dirBase)
         console.log('Imagen destacada guardada en: ', tempImageDir)
