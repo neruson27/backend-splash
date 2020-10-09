@@ -78,24 +78,24 @@ export const Mutation = {
           dir: 'asdasdasd',
           email: 'kaironelson@gmial.com' } */
         let numberOfOrders = (await Orders.find({})).length
-        if (numberOfOrders === 0 || numberOfOrders === undefined) data.orderNumber = 1
-        else data.orderNumber = numberOfOrders + 1
+        if (numberOfOrders === 0 || numberOfOrders === undefined) order.orderNumber = 1
+        else order.orderNumber = numberOfOrders + 1
         var renderedHtml = tmpl({
-          products: data.products,
-          orden: '0000'+data.orderNumber,
-          nombre: data.checkout.name,
-          dni: data.checkout.dni,
-          city: data.checkout.city,
-          tlf: data.checkout.tlf,
-          dir: data.checkout.dir,
-          email: data.checkout.email,
+          products: order.products,
+          orden: '0000'+order.orderNumber,
+          nombre: order.checkout.name,
+          dni: order.checkout.dni,
+          city: order.checkout.city,
+          tlf: order.checkout.tlf,
+          dir: order.checkout.dir,
+          email: order.checkout.email,
           fecha: new Date().toDateString(),
-          total: data.checkout.total,
+          total: order.checkout.total,
         });
         
           var mailOptions1 = {
             from: 'comercial@perfumesysplash.com',
-            to: data.checkout.email,
+            to: order.checkout.email,
             subject: 'Compra exitosa!',
             html: renderedHtml,
           }
