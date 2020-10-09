@@ -62,7 +62,7 @@ const types = `
 const queries = `
   AllOrders: [Orders]
   NumOrders: Int
-  OneOrder(id: ID): Orders
+  OneOrder(id: ID, id_buyer: String): Orders
 `
 
 const mutations = `

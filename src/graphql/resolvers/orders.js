@@ -39,8 +39,9 @@ export const Query = {
       return err
     });
   }),
-  OneOrder: authorize([], async (_, { id }, {credentials: { user }, dirBase}) => {
-    return Orders.findOne({"_id": id}).then((order) => {
+  OneOrder: authorize([], async (_, { id, id_buyer }, {credentials: { user }, dirBase}) => {
+    let consulta = id ? { "_id": id } : { "id_buyer": id_buyer }
+    return Orders.findOne(consulta).then((order) => {
       if (!order) throw 'not-order-for-show'
       return order
     }).catch((err) => {
