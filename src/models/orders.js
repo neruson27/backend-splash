@@ -14,7 +14,6 @@ const OrderSchema = new mongoose.Schema({
   },
   orderNumber: {
     type: Number,
-    unique: true
   },
   products: {
     type: [mongoose.Schema.Types.Mixed]
