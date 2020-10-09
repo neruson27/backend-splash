@@ -1,6 +1,7 @@
 const types = `
   type Orders {
     _id: ID
+    id_buyer: String
     ref_payco: String
     orderNumber: Int
     products: [Product]
@@ -22,6 +23,7 @@ const types = `
   }
 
   input OrdersInput {
+    id_buyer: String
     ref_payco: String
     products: [ProductsInput]
     checkout: UserDataInput

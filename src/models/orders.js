@@ -5,6 +5,9 @@ import { mongoError } from '../utils/handle-errors'
 const StatusEnum = ['Despachado', 'Por Despachar', 'Creada', 'Orden Invalida']
 
 const OrderSchema = new mongoose.Schema({
+  id_buyer: {
+    type: String
+  },
   ref_payco: {
     type: String,
     unique: true
