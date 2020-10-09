@@ -56,64 +56,6 @@ export const Mutation = {
   */
  CreateOrder: authorize([], async(_, { data }, {credentials: { user }, dirBase}) => {
     if(!data) throw 'invalid-data'
-    /* console.log(data.checkout)
-    { name: 'Nelson',
-      dni: '23224123',
-      total: '33.624',
-      concept: 'Esto',
-      tlf: '0414741768',
-      dir: 'asdasdasd',
-      email: 'kaironelson@gmial.com' } */
-    let numberOfOrders = (await Orders.find({})).length
-    if (numberOfOrders === 0 || numberOfOrders === undefined) data.orderNumber = 1
-    else data.orderNumber = numberOfOrders + 1
-    var renderedHtml = tmpl({
-      products: data.products,
-      orden: '0000'+data.orderNumber,
-      nombre: data.checkout.name,
-      dni: data.checkout.dni,
-      city: data.checkout.city,
-      tlf: data.checkout.tlf,
-      dir: data.checkout.dir,
-      email: data.checkout.email,
-      fecha: new Date().toDateString(),
-      total: data.checkout.total,
-    });
-    
-      var mailOptions1 = {
-        from: 'comercial@perfumesysplash.com',
-        to: data.checkout.email,
-        subject: 'Compra exitosa!',
-        html: renderedHtml,
-      }
-  
-      var mailOptions2 = {
-        from: 'comercial@perfumesysplash.com',
-        to: "gerencia@perfumesysplash.com",
-        subject: 'Un usuario ha comprado!',
-        html: renderedHtml,
-      }
-  
-      console.log("sending email", mailOptions1)
-  
-      transporter.sendMail(mailOptions1, function (error, info) {
-        console.log("senMail returned!");
-        if (error) {
-          console.log("ERROR!!!!!!", error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      })
-      console.log("sending email", mailOptions2)
-      transporter.sendMail(mailOptions2, function (error, info) {
-        console.log("senMail returned!");
-        if (error) {
-          console.log("ERROR!!!!!!", error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      })
-    
     
     return Orders.create(data).then(order => {
       return order
@@ -122,10 +64,72 @@ export const Mutation = {
     });
   }),
 
-  UpdateOrdersStatus: authorize([], async (_, { id, status }, {credentials: { user }, dirBase}) => {
+  UpdateOrdersStatus: authorize([], async (_, { id, status, ref }, {credentials: { user }, dirBase}) => {
     if(!status) throw new UserInputError()
-    return Orders.findOne({"_id": id}).then((order) => {
+    return Orders.findOne({"_id": id}).then(async (order) => {
+      if (status === 'Por Despachar') {
+        /* console.log(data.checkout)
+        { name: 'Nelson',
+          dni: '23224123',
+          total: '33.624',
+          concept: 'Esto',
+          tlf: '0414741768',
+          dir: 'asdasdasd',
+          email: 'kaironelson@gmial.com' } */
+        let numberOfOrders = (await Orders.find({})).length
+        if (numberOfOrders === 0 || numberOfOrders === undefined) data.orderNumber = 1
+        else data.orderNumber = numberOfOrders + 1
+        var renderedHtml = tmpl({
+          products: data.products,
+          orden: '0000'+data.orderNumber,
+          nombre: data.checkout.name,
+          dni: data.checkout.dni,
+          city: data.checkout.city,
+          tlf: data.checkout.tlf,
+          dir: data.checkout.dir,
+          email: data.checkout.email,
+          fecha: new Date().toDateString(),
+          total: data.checkout.total,
+        });
+        
+          var mailOptions1 = {
+            from: 'comercial@perfumesysplash.com',
+            to: data.checkout.email,
+            subject: 'Compra exitosa!',
+            html: renderedHtml,
+          }
+      
+          var mailOptions2 = {
+            from: 'comercial@perfumesysplash.com',
+            to: "gerencia@perfumesysplash.com",
+            subject: 'Un usuario ha comprado!',
+            html: renderedHtml,
+          }
+      
+          console.log("sending email", mailOptions1)
+      
+          transporter.sendMail(mailOptions1, function (error, info) {
+            console.log("senMail returned!");
+            if (error) {
+              console.log("ERROR!!!!!!", error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          })
+          console.log("sending email", mailOptions2)
+          transporter.sendMail(mailOptions2, function (error, info) {
+            console.log("senMail returned!");
+            if (error) {
+              console.log("ERROR!!!!!!", error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          })
+        
+        
+      }
       if (!order) throw 'not-order-for-show'
+      if (ref) order.ref_payco = ref
       order.status = status
       order.save()
       return order

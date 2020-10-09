@@ -65,7 +65,7 @@ const queries = `
 
 const mutations = `
   CreateOrder(data: OrdersInput): Orders
-  UpdateOrdersStatus(id: ID!, status: String): Orders
+  UpdateOrdersStatus(id: ID!, status: String, ref: String): Orders
   DeleteOrder(id: ID!): Response
 `
 
