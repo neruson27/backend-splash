@@ -57,7 +57,7 @@ export const Mutation = {
   */
  CreateOrder: authorize([], async(_, { data }, {credentials: { user }, dirBase}) => {
     if(!data) throw 'invalid-data'
-    
+    data.ref_payco = data.id_buyer
     return Orders.create(data).then(order => {
       return order
     }).catch((err) => {
