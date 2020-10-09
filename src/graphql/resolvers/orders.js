@@ -130,7 +130,10 @@ export const Mutation = {
         
       }
       if (!order) throw 'not-order-for-show'
-      if (ref) order.ref_payco = ref
+      if (ref) {
+        order.ref_payco = ref
+        order.orderNumber = numberOfOrders
+      }
       order.status = status
       order.save()
       return order
