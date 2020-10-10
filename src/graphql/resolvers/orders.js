@@ -57,7 +57,10 @@ export const Mutation = {
   */
  CreateOrder: authorize([], async(_, { data }, {credentials: { user }, dirBase}) => {
     if(!data) throw 'invalid-data'
-    data.ref_payco = data.id_buyer
+    data.ref_payco = data.id_buyer  
+    let numberOfOrders = (await Orders.find({ status: 'Creada' })).length
+    if (numberOfOrders === 0 || numberOfOrders === undefined) data.orderNumber = 1
+    else data.orderNumber = numberOfOrders + 1
     return Orders.create(data).then(order => {
       return order
     }).catch((err) => {
@@ -78,7 +81,7 @@ export const Mutation = {
           tlf: '0414741768',
           dir: 'asdasdasd',
           email: 'kaironelson@gmial.com' } */
-        let numberOfOrders = (await Orders.find({})).length
+        let numberOfOrders = (await Orders.find({ status: 'Por Despachar' })).length
         if (numberOfOrders === 0 || numberOfOrders === undefined) order.orderNumber = 1
         else order.orderNumber = numberOfOrders + 1
         var renderedHtml = tmpl({
