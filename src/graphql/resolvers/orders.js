@@ -67,6 +67,7 @@ export const Mutation = {
 
   UpdateOrdersStatus: authorize([], async (_, { id, status, ref }, {credentials: { user }, dirBase}) => {
     if(!status) throw new UserInputError()
+    if(!id) throw new UserInputError()
     return Orders.findOne({"_id": id}).then(async (order) => {
       if (status === 'Por Despachar') {
         /* console.log(data.checkout)
