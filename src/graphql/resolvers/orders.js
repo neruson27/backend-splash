@@ -1,6 +1,7 @@
 import { authorize } from '../../utils/authorize-resolvers';
 import { UserInputError, withFilter } from 'apollo-server-express';
 import Orders from '../../models/orders'
+import { Products } from '../../models/products'
 import dotenv from 'dotenv'
 dotenv.config()
 var nodemailer = require('nodemailer');
@@ -57,7 +58,15 @@ export const Mutation = {
   */
  CreateOrder: authorize([], async(_, { data }, {credentials: { user }, dirBase}) => {
     if(!data) throw 'invalid-data'
-    data.ref_payco = data.id_buyer  
+    if(!data.products[0]._id) throw 'invalid-product-id'
+    let products = data.products
+    data.products = []
+    data.ref_payco = data.id_buyer
+    for (let i = 0; i < products.length; i++) {
+      let product = await Products.findOneById({_id: products[i]._id})
+      product.quantity = products[i].quantity
+      data.products.push(product)
+    }
     let numberOfOrders = (await Orders.find({ status: 'Creada' })).length
     if (numberOfOrders === 0 || numberOfOrders === undefined) data.orderNumber = 1
     else data.orderNumber = numberOfOrders + 1
