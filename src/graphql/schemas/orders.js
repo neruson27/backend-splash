@@ -42,6 +42,7 @@ const types = `
   }
 
   input ProductsInput {
+    _id: ID
     name: String
     description: String
     price: String

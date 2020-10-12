@@ -58,13 +58,14 @@ export const Mutation = {
   */
  CreateOrder: authorize([], async(_, { data }, {credentials: { user }, dirBase}) => {
     if(!data) throw 'invalid-data'
+    console.log(data.products)
     if(!data.products[0]._id) throw 'invalid-product-id'
     let products = data.products
     data.products = []
     data.ref_payco = data.id_buyer
     for (let i = 0; i < products.length; i++) {
-      let product = await Products.findOneById({_id: products[i]._id})
-      product.quantity = products[i].quantity
+      let product = await Products.findById(products[i]._id).lean()
+      product['quantity'] = products[i].quantity
       data.products.push(product)
     }
     let numberOfOrders = (await Orders.find({ status: 'Creada' })).length
@@ -81,6 +82,7 @@ export const Mutation = {
     if(!status) throw new UserInputError()
     if(!id) throw new UserInputError()
     return Orders.findOne({"_id": id}).then(async (order) => {
+      if (!order) throw 'not-order-for-show'
       if (status === 'Por Despachar') {
         /* console.log(data.checkout)
         { name: 'Nelson',
@@ -90,6 +92,11 @@ export const Mutation = {
           tlf: '0414741768',
           dir: 'asdasdasd',
           email: 'kaironelson@gmial.com' } */
+        if (ref) {
+          order.ref_payco = ref
+        } else {
+          throw 'ref-needed'
+        }
         let numberOfOrders = (await Orders.find({ status: 'Por Despachar' })).length
         if (numberOfOrders === 0 || numberOfOrders === undefined) order.orderNumber = 1
         else order.orderNumber = numberOfOrders + 1
@@ -139,13 +146,7 @@ export const Mutation = {
               console.log('Email sent: ' + info.response);
             }
           })
-        
-        
-      }
-      if (!order) throw 'not-order-for-show'
-      if (ref) {
-        order.ref_payco = ref
-        order.orderNumber = numberOfOrders
+      
       }
       order.status = status
       order.save()
