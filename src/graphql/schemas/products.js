@@ -113,6 +113,13 @@ const types = `
     tags: [TagsInput]
     ref: String!
   }
+
+  input PaginationInput {
+    total: Int
+    page: Int
+    pages: Int
+    limit: Int
+  } 
 `
 const queries = `
   AllCategories: [Categories]
@@ -120,7 +127,8 @@ const queries = `
   AllBranchs: [Branch]
   AllTags: [Tag]
   AllTagsgroup: [Tagsgroup]
-  AllProducts: [Product]
+  AllProducts(pagination: PaginationInput): [Product]
+  HomeProducts: [Product]
   OneProduct(id: ID): Product
 `
 const mutations = `

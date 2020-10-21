@@ -9,9 +9,12 @@
     "start-heroku": "pm2-runtime start pm2.json --env heroku",
     "test-processpay": "NODE_ENV=development babel-node scripts/test-processpay.js",
     "populate": "NODE_ENV=development babel-node scripts/populatedb.js",
-    "populate-mlab": "NODE_ENV=heroku babel-node scripts/populatedb-mlab.js"
+    "populate-mlab": "NODE_ENV=heroku babel-node scripts/populatedb-mlab.js",
+    "populateProducts": "NODE_ENV=development nodemon scripts/populateProducts.js --exec babel-node"
   },
   "dependencies": {
+    "@dicebear/avatars": "^4.2.5",
+    "@dicebear/avatars-male-sprites": "^4.2.5",
     "apollo-server-express": "^2.4.8",
     "axios": "^0.18.1",
     "babel-cli": "^6.26.0",
@@ -29,6 +32,7 @@
     "jsonwebtoken": "^8.4.0",
     "moment": "^2.22.2",
     "mongoose": "^5.3.11",
+    "mongoose-paginate": "^5.0.3",
     "nodemailer": "^6.4.11",
     "nodemailer-html-to-text": "^3.1.0",
     "pm2": "^4.2.3",

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate'
 import moment from 'moment'
 import { mongoError } from '../utils/handle-errors'
 
@@ -135,7 +136,10 @@ const Subcategories = mongoose.model('subcategories', SubcategoriesSchema)
 
 const Tagsgroup = mongoose.model('tagsgroup', TagsgroupSchema)
 
+ProductSchema.plugin(mongoosePaginate);
+
 const Products = mongoose.model('products', ProductSchema)
+
 
 
 export {

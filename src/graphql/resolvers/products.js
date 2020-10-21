@@ -20,6 +20,7 @@ export const Query = {
     AllTags: [Tag]
     AllTagsgroup: [Tagsgroup]
     AllProducts: [Product]
+    HomeProducts: [Product]
     OneProduct(id: ID): Product
   */
   AllCategories: authorize([], async (_, __, { credentials: { user }, dirBase }) => {
@@ -87,11 +88,30 @@ export const Query = {
       return new UserInputError(err)
     }
   }),
-  AllProducts: authorize([], async (_, __, { credentials: { user }, dirBase }) => {
+  AllProducts: authorize([], async (_, { pagination }, { credentials: { user }, dirBase }) => {
     try {
-      return Products.find({}).then((products) => {
+      console.log(pagination)
+      return Products.paginate({}, pagination).then((products) => {
+        if (!products.docs) throw 'not-products-for-show'
+        return products.docs
+      }).catch((err) => {
+        throw err
+      });
+    } catch (err) {
+      console.error(err)
+      return new UserInputError(err)
+    }
+  }),
+  HomeProducts: authorize([], async (_, __, { credentials: { user }, dirBase }) => {
+    try {
+      return Products.find({}).sort( { createdAt : 1 } ).then((products) => {
         if (!products) throw 'not-products-for-show'
-        return products
+        let productsSelect = []
+        for (let index = 0; index < 4; index++) {
+          let rn = Math.ceil(Math.random() * products.length)
+          productsSelect.push(products[rn])
+        }
+        return productsSelect
       }).catch((err) => {
         throw err
       });
