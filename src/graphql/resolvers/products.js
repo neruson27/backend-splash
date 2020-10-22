@@ -22,6 +22,7 @@ export const Query = {
     AllProducts: [Product]
     HomeProducts: [Product]
     OneProduct(id: ID): Product
+    FilterProduct(pagination: PaginationInput,filter: FilterInput): [Product]
   */
   AllCategories: authorize([], async (_, __, { credentials: { user }, dirBase }) => {
     try {
@@ -88,10 +89,14 @@ export const Query = {
       return new UserInputError(err)
     }
   }),
-  AllProducts: authorize([], async (_, { pagination }, { credentials: { user }, dirBase }) => {
+  AllProducts: authorize([], async (_, { pagination, filter }, { credentials: { user }, dirBase }) => {
     try {
       console.log(pagination)
-      return Products.paginate({}, pagination).then((products) => {
+      let consulta = {}
+      if(filter.categoria) consulta["category.name"] = filter.categoria
+      if(filter.subcategoria) consulta["subcategory.name"] = filter.subcategoria
+      if(filter.tags) consulta["tags.name"] = filter.tags
+      return Products.paginate(consulta, pagination).then((products) => {
         if (!products.docs) throw 'not-products-for-show'
         return products.docs
       }).catch((err) => {
@@ -108,7 +113,7 @@ export const Query = {
         if (!products) throw 'not-products-for-show'
         let productsSelect = []
         for (let index = 0; index < 4; index++) {
-          let rn = Math.ceil(Math.random() * products.length)
+          let rn = Math.ceil(Math.random() * products.length) - 1
           productsSelect.push(products[rn])
         }
         return productsSelect
@@ -120,9 +125,9 @@ export const Query = {
       return new UserInputError(err)
     }
   }),
-  OneProduct: authorize([], async (_, { id }, { credentials: { user }, dirBase }) => {
+  OneProduct: authorize([], async (_, { ref }, { credentials: { user }, dirBase }) => {
     try {
-      return Products.findOne({ _id: id }).then((product) => {
+      return Products.findOne({ ref: ref }).then((product) => {
         if (!product) throw 'invalid-id'
         return product
       }).catch((err) => {
@@ -132,7 +137,25 @@ export const Query = {
       console.error(err)
       return new UserInputError(err)
     }
-  })
+  }),
+  FilterProduct: authorize([], async (_, { pagination, filter }, { credentials: { user }, dirBase }) => {
+    try {
+      console.log(pagination)
+      let consulta = {}
+      if(filter.categoria) consulta["category.name"] = filter.categoria
+      if(filter.subcategoria) consulta["subcategory.name"] = filter.subcategoria
+      if(filter.tags) consulta["tags.name"] = filter.tags
+      return Products.paginate(consulta, pagination).then((products) => {
+        if (!products.docs) throw 'not-products-for-show'
+        return products.docs
+      }).catch((err) => {
+        throw err
+      });
+    } catch (err) {
+      console.error(err)
+      return new UserInputError(err)
+    }
+  }),
 }
 
 export const Mutation = {

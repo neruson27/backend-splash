@@ -120,6 +120,12 @@ const types = `
     pages: Int
     limit: Int
   } 
+
+  input FilterInput {
+    categoria: String
+    subcategoria: String
+    tags: String
+  }
 `
 const queries = `
   AllCategories: [Categories]
@@ -127,9 +133,10 @@ const queries = `
   AllBranchs: [Branch]
   AllTags: [Tag]
   AllTagsgroup: [Tagsgroup]
-  AllProducts(pagination: PaginationInput): [Product]
+  FilterProduct(pagination: PaginationInput,filter: FilterInput): [Product]
+  AllProducts(pagination: PaginationInput,filter: FilterInput): [Product]
   HomeProducts: [Product]
-  OneProduct(id: ID): Product
+  OneProduct(ref: String): Product
 `
 const mutations = `
   AddCategories(data: CategoriesInput): Categories
