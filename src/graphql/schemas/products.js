@@ -51,6 +51,16 @@ const types = `
     createdAt: Date
   }
 
+  type ResponseAdmin {
+    product: [Product]
+    total: Int
+  }
+
+  type ResponseProductAdmin {
+    product: [Product]
+    pagination: Pagination
+  }
+
   input CategoriesInput {
     _id: ID
     name: String
@@ -133,8 +143,9 @@ const queries = `
   AllBranchs: [Branch]
   AllTags: [Tag]
   AllTagsgroup: [Tagsgroup]
-  FilterProduct(pagination: PaginationInput,filter: FilterInput): [Product]
+  ProductsAll(pagination: PaginationInput): ResponseProductAdmin
   AllProducts(pagination: PaginationInput,filter: FilterInput): [Product]
+  AdminProduct(pagination: PaginationInput): ResponseAdmin
   HomeProducts: [Product]
   OneProduct(ref: String): Product
 `

@@ -138,16 +138,40 @@ export const Query = {
       return new UserInputError(err)
     }
   }),
-  FilterProduct: authorize([], async (_, { pagination, filter }, { credentials: { user }, dirBase }) => {
+  AdminProduct: authorize([], async (_, { pagination }, { credentials: { user }, dirBase }) => {
     try {
       console.log(pagination)
-      let consulta = {}
-      if(filter.categoria) consulta["category.name"] = filter.categoria
-      if(filter.subcategoria) consulta["subcategory.name"] = filter.subcategoria
-      if(filter.tags) consulta["tags.name"] = filter.tags
-      return Products.paginate(consulta, pagination).then((products) => {
+      pagination["sort"] = {createdAt: 'asc'} 
+      return Products.paginate({}, pagination).then((products) => {
         if (!products.docs) throw 'not-products-for-show'
-        return products.docs
+        let response = {
+          product: products.docs,
+          total: products.total
+        }
+        return response
+      }).catch((err) => {
+        throw err
+      });
+    } catch (err) {
+      console.error(err)
+      return new UserInputError(err)
+    }
+  }),
+  ProductsAll: authorize([], async (_, { pagination }, { credentials: { user }, dirBase }) => {
+    try {
+      pagination["sort"] = {createdAt: 'asc'} 
+      return Products.paginate({}, pagination).then((products) => {
+        if (!products.docs) throw 'not-products-for-show'
+        let response = {
+          product: products.docs,
+          pagination: {
+            total: products.total,
+            page: products.page,
+            pages: products.pages,
+            limit: products.limit
+          }
+        }
+        return response
       }).catch((err) => {
         throw err
       });
