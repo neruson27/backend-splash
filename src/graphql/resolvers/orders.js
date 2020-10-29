@@ -24,10 +24,21 @@ export const Query = {
   NumOrders: Int
   OneOrder(id: ID): Orders
   */
-  AllOrders: authorize([], async (_, { }, {credentials: { user }, dirBase}) => {
-    return Orders.find({}).then((orders) => {
-      if (!orders) throw 'not-orders-for-show'
-      return orders
+  AllOrders: authorize([], async (_, { pagination, filter }, {credentials: { user }, dirBase}) => {
+    console.log(pagination)
+    pagination["sort"] = {createdAt: 'asc'} 
+    return Orders.paginate({}, pagination).then((orders) => {
+      if (orders.docs.length === 0) throw 'not-orders-for-show'
+        let response = {
+          orders: orders.docs,
+          pagination: {
+            total: orders.total,
+            page: orders.page,
+            pages: orders.pages,
+            limit: orders.limit
+          }
+        }
+        return response
     }).catch((err) => {
       return err
     });
