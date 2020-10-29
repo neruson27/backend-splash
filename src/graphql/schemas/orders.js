@@ -66,7 +66,7 @@ const types = `
 `
 
 const queries = `
-  AllOrders(pagination: PaginationInput,filter: FilterInput): OrdenResponse
+  AllOrders(pagination: PaginationInput, filter: FilterInput): OrdenResponse
   NumOrders: Int
   OneOrder(id: ID, id_buyer: String): Orders
 `
