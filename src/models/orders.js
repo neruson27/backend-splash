@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate'
 import moment from 'moment'
 import { mongoError } from '../utils/handle-errors'
 
@@ -37,6 +38,8 @@ const OrderSchema = new mongoose.Schema({
     default: new Date()
   }
 }, { _id: true })
+
+OrderSchema.plugin(mongoosePaginate);
 
 const Orders = mongoose.model('orders', OrderSchema)
 

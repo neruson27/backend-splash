@@ -22,6 +22,11 @@ const types = `
     email: String
   }
 
+  type OrdenResponse {
+    orders: [Orders]
+    pagination: Pagination
+  }
+
   input OrdersInput {
     id_buyer: String
     ref_payco: String
@@ -61,7 +66,7 @@ const types = `
 `
 
 const queries = `
-  AllOrders: [Orders]
+  AllOrders(pagination: PaginationInput,filter: FilterInput): OrdenResponse
   NumOrders: Int
   OneOrder(id: ID, id_buyer: String): Orders
 `
