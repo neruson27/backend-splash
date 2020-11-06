@@ -98,7 +98,15 @@ export const Query = {
       if(filter.tags) consulta["tags.name"] = filter.tags
       return Products.paginate(consulta, pagination).then((products) => {
         if (!products.docs) throw 'not-products-for-show'
-        return products.docs
+        return {
+          product: products.docs,
+          pagination: {
+            total: products.total,
+            page: products.page,
+            pages: products.pages,
+            limit: products.limit
+          }
+        }
       }).catch((err) => {
         throw err
       });

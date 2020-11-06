@@ -42,6 +42,8 @@ const types = `
     concept: String
     tlf: String
     city: String
+    dirExt: String
+    department: String
     dir: String
     email: String
   }

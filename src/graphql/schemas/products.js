@@ -144,7 +144,7 @@ const queries = `
   AllTags: [Tag]
   AllTagsgroup: [Tagsgroup]
   ProductsAll(pagination: PaginationInput): ResponseProductAdmin
-  AllProducts(pagination: PaginationInput,filter: FilterInput): [Product]
+  AllProducts(pagination: PaginationInput,filter: FilterInput): ResponseProductAdmin
   AdminProduct(pagination: PaginationInput): ResponseAdmin
   HomeProducts: [Product]
   OneProduct(ref: String): Product
