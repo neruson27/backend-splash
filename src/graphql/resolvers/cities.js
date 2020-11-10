@@ -45,12 +45,20 @@ export const Query = {
 export const Mutation = {
   NewTax: authorize([], async (_, { data }, { credentials: { user }, dirBase }) => {
     try {
+      if(data.tax <= 0) throw 'No se puede poner un precio negativo'
       if(data.defaultTax){
         let respuesta = await City.find({defaultTax: true})
           if(respuesta.length > 0){
             respuesta[0].defaultTax = false
             respuesta[0].save()
           }
+      }
+      if(data.cities && data.cities.length > 0) {
+        for (let index = 0; index < data.cities.length; index++) {
+          const element = data.cities[index];
+          let res = await City.findOne({'cities.name':element.name,'cities.departamento':element.departamento}).lean()
+          if(res) throw element.name + ' ya tiene un precio'
+        }
       }
       return City.create(data).then((response) => {
         return response
@@ -64,6 +72,7 @@ export const Mutation = {
   }),
   UpdTax: authorize([], async (_, { id,data }, { credentials: { user }, dirBase }) => {
     try {
+      if(data.tax <= 0) throw 'No se puede poner un precio negativo'
       return City.findById(id).then(async (response) => {
         if(!data) throw 'data-is-undefined'
         if(data.cities && data.cities.length > 0) {

@@ -12,7 +12,7 @@ const TaxSchemas = new mongoose.Schema({
     default: false
   },
   cities: {
-    type: [CitiesSchemas]
+    type: [mongoose.Schema.Types.Mixed]
   },
 }, {_id: true})
 
@@ -20,7 +20,7 @@ const CitiesSchemas = new mongoose.Schema({
   name: {
     type: String
   },
-  department: {
+  departamento: {
     type: String
   }
 }, {_id: true})
