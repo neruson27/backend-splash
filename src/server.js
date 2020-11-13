@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors';
 import helmet from 'helmet';
 import initMongo from './utils/mongodb'
+import jobs from './jobs'
 import graphql from './graphql'
 import authorization from './middleware/authorization'
 import { request } from 'http';
@@ -111,6 +112,7 @@ const init = async () => {
     // statements
     await initMongo(app);
     await graphql(app);
+    await jobs(app);
 
     const listen = { 
       port: process.env.PORT || 3000 

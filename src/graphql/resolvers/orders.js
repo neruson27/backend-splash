@@ -26,7 +26,13 @@ export const Query = {
   */
   AllOrders: authorize([], async (_, { pagination, filter }, {credentials: { user }, dirBase}) => {
     console.log(pagination)
-    pagination["sort"] = {createdAt: 'asc'} 
+    if(pagination === undefined) {
+      pagination = {
+        page: 1,
+        limit: 10
+      }
+    }
+    pagination["sort"] = {createdAt: 'desc'} 
     return Orders.paginate({}, pagination).then((orders) => {
       if (orders.docs.length === 0) throw 'not-orders-for-show'
         let response = {

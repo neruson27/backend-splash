@@ -129,6 +129,7 @@ const types = `
     page: Int
     pages: Int
     limit: Int
+    sort: Object
   } 
 
   input FilterInput {
